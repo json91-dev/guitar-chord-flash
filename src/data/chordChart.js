@@ -31,18 +31,17 @@ export const ROW_LABEL = {
 
 const NATURAL_ROWS = [0, 2, 4, 5, 7, 9, 11];
 const ACCIDENTAL_ROWS = [1, 3, 6, 8, 10];
-const ALL_ROWS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const BASIC_COLUMNS = [
-  { key: "major", title: "메이저" },
-  { key: "m", title: "마이너" },
-  { key: "7", title: "7th" },
-  { key: "m7", title: "마이너 7th" },
-  { key: "M7", title: "메이저 7th" },
+  { key: "major", title: "Major" },
+  { key: "m", title: "Minor" },
+  { key: "7", title: "7" },
+  { key: "m7", title: "m7" },
+  { key: "M7", title: "M7" },
 ];
 const DIM_SUS_COLUMNS = [
-  { key: "dim", title: "디미니시" },
-  { key: "sus4", title: "서스4" },
+  { key: "dim", title: "dim" },
+  { key: "sus4", title: "sus4" },
   { key: "add9", title: "add9" },
 ];
 
@@ -52,12 +51,14 @@ function buildView(label, columns, rows) {
     label: ROW_LABEL[pitchClass],
     cells: columns.map((c) => CHORD_GRID[pitchClass]?.[c.key] ?? null),
   }));
-  const total = lines.reduce((sum, l) => sum + l.cells.filter(Boolean).length, 0);
-  return { label, columns, lines, total };
+  const chords = lines.flatMap((l) => l.cells.filter(Boolean));
+  const total = chords.length;
+  return { label, columns, lines, chords, total };
 }
 
 export const CHART_VIEWS = {
-  basic: buildView("기본", BASIC_COLUMNS, NATURAL_ROWS),
-  accidental: buildView("#/b 포함", BASIC_COLUMNS, ACCIDENTAL_ROWS),
-  dimSus: buildView("dim·sus4·add9", DIM_SUS_COLUMNS, ALL_ROWS),
+  basic: buildView("기본코드", BASIC_COLUMNS, NATURAL_ROWS),
+  accidental: buildView("#,b", BASIC_COLUMNS, ACCIDENTAL_ROWS),
+  dimSus: buildView("dim·sus4·add9", DIM_SUS_COLUMNS, NATURAL_ROWS),
+  dimSusAccidental: buildView("dim·sus4·add9 #,b", DIM_SUS_COLUMNS, ACCIDENTAL_ROWS),
 };
