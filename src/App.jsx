@@ -4,15 +4,10 @@ import ChordDiagram from "./ChordDiagram.jsx";
 import ChordChart from "./ChordChart.jsx";
 
 const BEATS_PER_CHORD = 4;
-const DEFAULT_BPM = 100;
+const DEFAULT_BPM = 60;
 const BPM_MIN = 30;
 const BPM_MAX = 250;
 const BPM_STEP = 10;
-const BPM_PRESETS = [40, 60, 80, 100, 120, 140];
-const BPM_OPTIONS = Array.from(
-  { length: (BPM_MAX - BPM_MIN) / BPM_STEP + 1 },
-  (_, i) => BPM_MIN + i * BPM_STEP
-);
 
 function getActiveChords(chartView) {
   return CHART_VIEWS[chartView].chords;
@@ -387,42 +382,24 @@ export default function App() {
       </div>
 
       <div className="speed-control">
+        <button className="bpm-step" onClick={() => applyBpm(Math.max(BPM_MIN, bpm - BPM_STEP))} disabled={bpm <= BPM_MIN} aria-label="BPM 낮추기">
+          <svg width="6" height="11" viewBox="0 0 6 11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="5,1 1,5.5 5,10" /></svg>
+        </button>
         <div className="speed-bpm">
           <span id="bpm-value">{bpm}</span> BPM
-          <button className={`metro-btn${metronomeOn ? " active" : ""}`} id="metro-btn" onClick={toggleMetronome}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 17a7 7 0 0114 0" />
-              <path d="M4 21h16" />
-              <circle cx="12" cy="17" r="1.2" fill="currentColor" stroke="none" />
-            </svg>
-            메트로놈
-          </button>
         </div>
-        <div className="bpm-presets">
-          {BPM_PRESETS.map((p) => (
-            <button
-              key={p}
-              className={`bpm-preset${bpm === p ? " active" : ""}`}
-              onClick={() => applyBpm(p)}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
-        <div className="chord-pool-picker">
-          <select
-            className="chord-pool-select"
-            value={bpm}
-            onChange={(e) => applyBpm(parseInt(e.target.value, 10))}
-          >
-            {BPM_OPTIONS.map((v) => (
-              <option key={v} value={v}>{v} BPM</option>
-            ))}
-          </select>
-          <svg className="chord-pool-picker-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <polyline points="1,1 5,5 9,1" />
+        <button className="bpm-step" onClick={() => applyBpm(Math.min(BPM_MAX, bpm + BPM_STEP))} disabled={bpm >= BPM_MAX} aria-label="BPM 높이기">
+          <svg width="6" height="11" viewBox="0 0 6 11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="1,1 5,5.5 1,10" /></svg>
+        </button>
+        <button className={`metro-btn${metronomeOn ? " active" : ""}`} id="metro-btn" onClick={toggleMetronome} style={{ "--beat-ms": Math.round(60000 / bpm) }} title={`메트로놈 ${metronomeOn ? "끄기" : "켜기"}`} aria-label="메트로놈" aria-pressed={metronomeOn}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path className="metro-body" d="M9 3h6l4 18H5z" />
+            <g className="metro-arm">
+              <path d="M12 19V5" />
+              <rect x="10.2" y="8" width="3.6" height="3" rx="0.6" fill="currentColor" />
+            </g>
           </svg>
-        </div>
+        </button>
       </div>
 
       <div className="controls">
