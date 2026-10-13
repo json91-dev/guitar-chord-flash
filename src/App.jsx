@@ -352,6 +352,7 @@ export default function App() {
             )}
             <ChordDiagram
               name={display.current ? display.current[0] : null}
+              variant={display.current ? display.current[2] : undefined}
               className={`chord-diagram${display.current ? "" : " chord-diagram-hidden"}`}
             />
             <div className={`timer-bar-bg${display.current ? "" : " timer-bar-bg-hidden"}`}>

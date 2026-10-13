@@ -40,7 +40,7 @@ export default function ChordChart() {
                     {cell && (
                       <>
                         <div className="chart-item-name">{cell[0]}</div>
-                        <ChordDiagram name={cell[0]} className="chart-diagram" />
+                        <ChordDiagram name={cell[0]} variant={cell[2]} className="chart-diagram" />
                       </>
                     )}
                   </div>

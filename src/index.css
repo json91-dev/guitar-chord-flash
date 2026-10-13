@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   --font-ui: 'Asta Sans', system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Asta Sans', sans-serif;
@@ -12,25 +12,12 @@
   --color-border-soft: #ece7db;
   --color-primary: #b45309;
   --color-primary-tint: #fdf0dc;
+  --color-on-primary: #ffffff;
   --color-secondary: #9a3412;
   --color-destructive: #dc2626;
   --color-ring: #b45309;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1c1712;
-    --color-surface: #262019;
-    --color-text: #f5efe4;
-    --color-text-soft: #c9bba6;
-    --color-border: #3a2f22;
-    --color-border-soft: #2e271e;
-    --color-primary: #f0a93b;
-    --color-primary-tint: #3a2f1f;
-    --color-secondary: #c77b4a;
-    --color-destructive: #ef4444;
-    --color-ring: #f0a93b;
-  }
+  --shadow-soft: rgba(43, 39, 33, 0.06);
+  --shadow-medium: rgba(43, 39, 33, 0.08);
 }
 
 body {
@@ -65,7 +52,7 @@ body {
 .page-nav {
   display: flex;
   gap: 6px;
-  margin-top: 24px;
+  margin-top: clamp(8px, 2.7vh, 24px);
   margin-bottom: 8px;
 }
 .page-nav-btn {
@@ -110,7 +97,7 @@ body {
   color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(43, 39, 33, 0.08);
+  box-shadow: 0 8px 24px var(--shadow-medium);
 }
 .chord-sheet-header {
   display: flex;
@@ -205,7 +192,7 @@ body {
   flex: 0 0 clamp(140px, 30%, 280px);
   min-width: 0;
   text-align: center;
-  padding: 1.35rem 1rem;
+  padding: clamp(0.6rem, 1.5vh, 1.35rem) 1rem;
   visibility: hidden;
   min-height: 160px;
 }
@@ -231,24 +218,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 360px;
+  min-height: clamp(240px, 40vh, 360px);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(43, 39, 33, 0.06);
+  box-shadow: 0 8px 24px var(--shadow-soft);
   opacity: 1;
   visibility: visible;
 }
 #card-current .chord-name {
   font-weight: 700;
-  font-size: clamp(56px, 11vw, 96px);
+  font-size: min(clamp(56px, 11vw, 96px), max(44px, 10.7vh));
   color: var(--color-primary);
   min-height: 1em;
 }
 #card-current .chord-label {
   font-size: 16px;
   color: var(--color-text-soft);
-  margin-top: 11px;
+  margin-top: clamp(6px, 1.2vh, 11px);
   line-height: 1.3;
   min-height: 1.3em;
 }
@@ -278,8 +265,8 @@ body {
 }
 .chord-diagram {
   width: 100%;
-  max-width: 135px;
-  margin: 12px auto 0;
+  max-width: min(135px, max(96px, 15vh));
+  margin: clamp(6px, 1.35vh, 12px) auto 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border-soft);
   border-radius: 8px;
@@ -292,7 +279,7 @@ body {
   background: var(--color-border-soft);
   border-radius: 2px;
   overflow: hidden;
-  margin: 1.35rem auto 0;
+  margin: clamp(10px, 2.4vh, 1.35rem) auto 0;
 }
 .timer-bar {
   height: 100%;
@@ -304,7 +291,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 1.5rem;
+  margin-top: clamp(10px, 1.7vh, 1.5rem);
 }
 .btn-pill {
   display: flex;
@@ -334,7 +321,7 @@ body {
 .btn-pill-main {
   border: none;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font-weight: 600;
   padding: 0;
   width: 112px;
@@ -343,7 +330,7 @@ body {
 }
 .btn-pill-main:hover {
   opacity: 0.88;
-  color: #fff;
+  color: var(--color-on-primary);
 }
 .count {
   font-size: 14px;
@@ -382,7 +369,7 @@ body {
   position: relative;
   display: inline-flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: clamp(8px, 2.2vh, 20px);
   margin-bottom: 4px;
 }
 .chord-pool-select {
@@ -417,7 +404,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: clamp(8px, 1.8vh, 16px);
 }
 .bpm-step {
   display: inline-flex;

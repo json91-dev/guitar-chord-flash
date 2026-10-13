@@ -13,8 +13,8 @@ const INK = "#111";
 const rowY = (stringIdx) => TOP + (STRINGS - 1 - stringIdx) * ROW_H;
 const fretX = (fret) => NUT_X + (fret - 0.5) * CELL_W;
 
-export default function ChordDiagram({ name, className }) {
-  const data = name ? getChordDiagram(name) : null;
+export default function ChordDiagram({ name, variant, className }) {
+  const data = name ? getChordDiagram(name, variant) : null;
   const chord = data?.chord;
   const { frets = [], fingers = [], barres = [], baseFret = 1 } = chord || {};
 
