@@ -67,7 +67,7 @@ export default function App() {
     gain.connect(ctx.destination);
     osc.type = "sine";
     osc.frequency.value = accent ? 1800 : 1200;
-    gain.gain.setValueAtTime(accent ? 0.42 : 0.35, ctx.currentTime);
+    gain.gain.setValueAtTime(accent ? 0.6 : 0.5, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
     osc.start(ctx.currentTime);
     osc.stop(ctx.currentTime + 0.06);

@@ -26,6 +26,16 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
 }
+body::before {
+  --bg-size: max(calc(155vh - 130px), 100vw);
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("./assets/bg.jpg") 50% calc(105px - 0.356 * var(--bg-size)) / var(--bg-size) auto no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
 #root {
   display: flex;
   flex-direction: column;
@@ -64,7 +74,7 @@ body {
   padding: 0 18px;
   border-radius: 100px;
   border: 1px solid var(--color-border);
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.7);
   color: var(--color-text-soft);
   font-size: 13px;
   font-family: var(--font-ui);
@@ -93,7 +103,7 @@ body {
   box-sizing: border-box;
   margin-top: 12px;
   padding: 28px 32px 36px;
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.7);
   color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 16px;
@@ -219,7 +229,7 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: clamp(240px, 40vh, 360px);
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--color-border);
   border-radius: 16px;
   box-shadow: 0 8px 24px var(--shadow-soft);

@@ -23,7 +23,7 @@ const E_SHAPE = {
   minor: { frets: [1, 3, 3, 1, 1, 1], fingers: [1, 3, 4, 1, 1, 1] },
   "7": { frets: [1, 3, 1, 2, 1, 1], fingers: [1, 3, 1, 2, 1, 1] },
   m7: { frets: [1, 3, 1, 1, 1, 1], fingers: [1, 3, 1, 1, 1, 1] },
-  maj7: { frets: [1, -1, 2, 2, 1, -1], fingers: [1, 0, 3, 4, 1, 0] },
+  maj7: { frets: [1, 3, 2, 2, 1, 1], fingers: [1, 4, 2, 3, 1, 1] },
 };
 const eShape = (kind, baseFret) => ({ ...E_SHAPE[kind], barres: [1], baseFret });
 
@@ -38,6 +38,7 @@ export const BARRE_POSITION = {
   A: eShape("major", 5), Am: eShape("minor", 5), A7: eShape("7", 5),
   Am7: eShape("m7", 5), AM7: eShape("maj7", 5),
   G: eShape("major", 3), G7: eShape("7", 3), GM7: eShape("maj7", 3),
+  GbM7: eShape("maj7", 2), AbM7: eShape("maj7", 4),
   F: eShape("major", 1), FM7: eShape("maj7", 1),
 };
 
